@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Variables
+KEY_NAME="bcitkey"
+PUBLIC_KEY_PATH="$HOME/.ssh/lab3key.pub" 
+
+# Generate a new key pair
+if test -f $PUBLIC_KEY_PATH; then
+  echo "Key Pair File exists."
+else
+    ssh-keygen -t ed25519 -f ~/.ssh/lab3key -C "lab3key"
+fi
+
+# Import the public key to AWS
+aws ec2 import-key-pair \
+    --key-name "$KEY_NAME" \
+    --public-key-material fileb://$PUBLIC_KEY_PATH \
+    --region us-west-2 \
+    --profile acit4640_admin \
+    --output json > /tmp/key.json
+    
