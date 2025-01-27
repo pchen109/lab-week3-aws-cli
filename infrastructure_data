@@ -1,0 +1,8 @@
+vpc_id=vpc-0fde6cda7dcaf4b81
+subnet_id=subnet-0a0ddf0276a849bdf
+
+ubuntu_ami=ami-04eed88b1a6b28477
+key_name=bcitkey
+instance_id=i-0be95424f67a7109a
+public_ip=35.92.161.190
+security_group_id=sg-0256f7f70576be461

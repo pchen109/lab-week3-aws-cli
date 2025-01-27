@@ -18,5 +18,7 @@ else
     --region us-west-2 \
     --create-bucket-configuration LocationConstraint=us-west-2 \
     --output json > /tmp/bucket.json
-  echo "Bucket Name: $bucket_name"
+  
+  echo "Bucket '$bucket_name' has been created in AWS."
+  echo "Bucket Name: $bucket_name" >> infrastructure_data
 fi

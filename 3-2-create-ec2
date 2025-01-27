@@ -41,7 +41,8 @@ instance_id=$(aws ec2 run-instances \
     --associate-public-ip-address \
     --subnet-id $subnet_id \
     --query "Instances[0].InstanceId" \
-    --output json)
+    --output text)
+echo "Instance '$instance_id' is created."
 
 
 # wait for ec2 instance to be running
@@ -52,12 +53,13 @@ aws ec2 wait instance-running --instance-ids $instance_id
 public_ip=$(aws ec2 describe-instances \
     --instance-ids $instance_id \
     --query "Reservations[0].Instances[0].PublicIpAddress" \
-    --output json)
+    --output text)
+echo "Public IP '$public_ip' is contained."
 
 # Write instance data to a file
 # COMPLETE THIS PART
-echo "Ubuntu AMI: $ubuntu_ami" >> infrastructure_data
-echo "Key Name: $key_name" >> infrastructure_data
-echo "Instance ID: $instance_id" >> infrastructure_data
-echo "Public IP: $public_ip" >> infrastructure_data
-echo "Security Group ID: $security_group_id" >> infrastructure_data
+echo "ubuntu_ami=$ubuntu_ami" >> infrastructure_data
+echo "key_name=$key_name" >> infrastructure_data
+echo "instance_id=$instance_id" >> infrastructure_data
+echo "public_ip=$public_ip" >> infrastructure_data
+echo "security_group_id=$security_group_id" >> infrastructure_data
