@@ -15,12 +15,13 @@ ubuntu_ami=$(aws ec2 describe-images --region $region \
  --query 'sort_by(Images, &CreationDate)[-1].ImageId' --output text)
 
 
-# # Create security group allowing SSH and HTTP from anywhere
+# Create security group allowing SSH and HTTP from anywhere
 security_group_id=$(aws ec2 create-security-group --group-name MySecurityGroup3 \
  --description "Allow SSH and HTTP" --vpc-id $vpc_id --query 'GroupId' \
  --region $region \
  --output text)
 
+# Add /dev/null to the end of the command to suppress the output
 aws ec2 authorize-security-group-ingress --group-id $security_group_id \
  --protocol tcp --port 22 --cidr 0.0.0.0/0 --region $region >> /dev/null
 
@@ -31,7 +32,6 @@ sleep 10
 
 # Launch an EC2 instance in the public subnet
 # COMPLETE THIS PART
-    # --security-group-ids sg-04d905849e08ccbf3 \
 instance_id=$(aws ec2 run-instances \
     --security-group-ids $security_group_id \
     --image-id $ubuntu_ami \
@@ -46,7 +46,6 @@ instance_id=$(aws ec2 run-instances \
 
 # wait for ec2 instance to be running
 aws ec2 wait instance-running --instance-ids $instance_id
-echo "Instance ID: $instance_id"
 
 # Get the public IP address of the EC2 instance
 # COMPLETE THIS PART
@@ -57,4 +56,8 @@ public_ip=$(aws ec2 describe-instances \
 
 # Write instance data to a file
 # COMPLETE THIS PART
-echo "Public IP: $public_ip" 
+echo "Ubuntu AMI: $ubuntu_ami" >> infrastructure_data
+echo "Key Name: $key_name" >> infrastructure_data
+echo "Instance ID: $instance_id" >> infrastructure_data
+echo "Public IP: $public_ip" >> infrastructure_data
+echo "Security Group ID: $security_group_id" >> infrastructure_data
