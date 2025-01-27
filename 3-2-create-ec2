@@ -61,5 +61,6 @@ echo "Public IP '$public_ip' is contained."
 echo "ubuntu_ami=$ubuntu_ami" >> infrastructure_data
 echo "key_name=$key_name" >> infrastructure_data
 echo "instance_id=$instance_id" >> infrastructure_data
-echo "public_ip=$public_ip" >> infrastructure_data
 echo "security_group_id=$security_group_id" >> infrastructure_data
+
+echo "public_ip=$public_ip" >> instance_data

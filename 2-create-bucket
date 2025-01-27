@@ -20,5 +20,5 @@ else
     --output json > /tmp/bucket.json
   
   echo "Bucket '$bucket_name' has been created in AWS."
-  echo "Bucket Name: $bucket_name" >> infrastructure_data
+  echo "bucket_name=$bucket_name" >> instance_data
 fi
